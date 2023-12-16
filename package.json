@@ -3,13 +3,23 @@
     "description": "Mocks the Bridge Launcher API for development purposes.",
     "authors": "Tored",
     "version": "0.0.1",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/bridgelauncher/api-mock/issues"
+    },
+    "homepage": "https://github.com/bridgelauncher",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bridgelauncher/api-mock"
+    },
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "scripts": {
         "build": "tsc --emitDeclarationOnly && esbuild ./src/index.ts --bundle --platform=neutral --outfile=./dist/index.js"
     },
     "dependencies": {
-        "typescript": "^5.3.3"
+        "typescript": "^5.3.3",
+        "@bridgelauncher/api": "^0.0.1"
     },
     "devDependencies": {
         "esbuild": "0.19.9"

@@ -1,4 +1,4 @@
-import { WindowInsets } from "@theothertored/bridge-api";
+import { WindowInsets } from "@bridgelauncher/api";
 
 export function windowInsets(left: number, top: number, right: number, bottom: number): WindowInsets
 {

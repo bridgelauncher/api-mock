@@ -1,4 +1,4 @@
-import type { BridgeButtonVisibility, BridgeTheme, SystemBarAppearance, SystemNightMode } from "@theothertored/bridge-api";
+import type { BridgeButtonVisibility, BridgeTheme, SystemBarAppearance, SystemNightMode } from "@bridgelauncher/api";
 
 import { windowInsets } from "./utils";
 

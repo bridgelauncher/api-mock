@@ -1,4 +1,4 @@
-import type { BridgeButtonVisibility, BridgeEventListenerArgs, BridgeInstalledAppInfo, BridgeTheme, JSToBridgeAPI, SystemBarAppearance, SystemNightMode, SystemNightModeOrError, WindowInsets, WindowInsetsJson, BridgeGetAppsResponse } from "@theothertored/bridge-api";
+import type { BridgeButtonVisibility, BridgeEventListenerArgs, BridgeInstalledAppInfo, BridgeTheme, JSToBridgeAPI, SystemBarAppearance, SystemNightMode, SystemNightModeOrError, WindowInsets, WindowInsetsJson, BridgeGetAppsResponse } from "@bridgelauncher/api";
 import { createDefaultBridgeMockConfig as createDefaultBridgeMockConfig, type BridgeMockConfig } from "./BridgeMockConfig";
 import { windowInsets } from "./utils";
 
