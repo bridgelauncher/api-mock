@@ -1,0 +1,17 @@
+{
+    "name": "@bridgelauncher/api-mock",
+    "description": "Mocks the Bridge Launcher API for development purposes.",
+    "authors": "Tored",
+    "version": "0.0.1",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "scripts": {
+        "build": "tsc --emitDeclarationOnly && esbuild ./src/index.ts --bundle --platform=neutral --outfile=./dist/index.js"
+    },
+    "dependencies": {
+        "typescript": "^5.3.3"
+    },
+    "devDependencies": {
+        "esbuild": "0.19.9"
+    }
+}
