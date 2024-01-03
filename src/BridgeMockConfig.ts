@@ -1,4 +1,4 @@
-import type { BridgeButtonVisibility, BridgeTheme, SystemBarAppearance, SystemNightMode } from "@bridgelauncher/api";
+import type { BridgeButtonVisibility, BridgeTheme, OverscrollEffects, SystemBarAppearance, SystemNightMode } from "@bridgelauncher/api";
 
 import { windowInsets } from "./utils";
 
@@ -7,6 +7,8 @@ export function createDefaultBridgeMockConfig()
     return {
         // system
         apiLevel: 34,
+        bridgeVersionCode: 2,
+        bridgeVersionName: '0.0.2alpha',
         logRaisedBridgeEvents: true,
 
         // fetch
@@ -23,6 +25,9 @@ export function createDefaultBridgeMockConfig()
 
         // draw system wallpaper behind web view
         initialDrawSystemWallpaperBehindWebViewEnabled: true,
+
+        // overscroll effects
+        initialOverscrollEffects: <OverscrollEffects>'none',
 
         // system night mode
         canRequestSystemNightMode: true,

@@ -21,3 +21,5 @@ Download files from the `src` folder into your project and import accordingly, o
 - [Bridge Launcher project home](https://github.com/bridgelauncher)
 - [Launcher](https://github.com/bridgelauncher/launcher)
 - [API mock for development](https://github.com/bridgelauncher/api)
+- [Discord server](https://discord.gg/Tv23aZrVb8) - I blogpost as I go
+- [theothertored@gmail.com](mailto:theothertored@gmail.com) - Contact email
