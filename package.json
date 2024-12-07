@@ -2,7 +2,7 @@
     "name": "@bridgelauncher/api-mock",
     "description": "Mocks the Bridge Launcher API for development purposes.",
     "authors": "Tored",
-    "version": "0.0.3",
+    "version": "0.1.0",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/bridgelauncher/api-mock/issues"
@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "typescript": "^5.3.3",
-        "@bridgelauncher/api": "^0.0.3"
+        "@bridgelauncher/api": "^0.1.0"
     },
     "devDependencies": {
         "esbuild": "0.19.9"

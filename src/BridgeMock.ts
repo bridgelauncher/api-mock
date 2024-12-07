@@ -1,4 +1,4 @@
-import type { BridgeButtonVisibility, BridgeEventListenerArgs, BridgeInstalledAppInfo, BridgeTheme, JSToBridgeAPI, SystemBarAppearance, SystemNightMode, SystemNightModeOrError, WindowInsets, WindowInsetsJson, BridgeGetAppsResponse, OverscrollEffects } from "@bridgelauncher/api";
+import type { BridgeButtonVisibility, BridgeTheme, JSToBridgeAPI, SystemBarAppearance, SystemNightMode, SystemNightModeOrError, WindowInsets, WindowInsetsJson, BridgeGetAppsResponse, OverscrollEffects, BridgeEvent, BridgeEventName, BridgeEventMap } from "@bridgelauncher/api";
 import { createDefaultBridgeMockConfig as createDefaultBridgeMockConfig, type BridgeMockConfig } from "./BridgeMockConfig";
 import { windowInsets } from "./utils";
 
@@ -54,7 +54,7 @@ export class BridgeMock implements JSToBridgeAPI
     public navigationBarAppearance: SystemBarAppearance;
     public canLockScreen: boolean;
 
-    
+
     constructor(config?: BridgeMockConfig)
     {
         this.config = config ?? createDefaultBridgeMockConfig();
@@ -76,11 +76,13 @@ export class BridgeMock implements JSToBridgeAPI
         return this.config.apiLevel;
     }
 
-    getBridgeVersionCode(): number {
+    getBridgeVersionCode(): number
+    {
         return this.config.bridgeVersionCode;
     }
-    
-    getBridgeVersionName(): string {
+
+    getBridgeVersionName(): string
+    {
         return this.config.bridgeVersionName;
     }
 
@@ -102,18 +104,13 @@ export class BridgeMock implements JSToBridgeAPI
         return this.config.appsUrl;
     }
 
-    getDefaultAppIconURL(packageName: string): string 
-    {
-        return this.config.makeGetDefaultIconUrl(packageName);
-    }
-
 
     // apps
 
     requestAppUninstall(packageName: string, showToastIfFailed?: boolean): boolean
     {
         alert(`${this._prefix} requestAppUninstall: ${packageName}`);
-        this.raiseBridgeEvent('appRemoved', { packageName });
+        this.raiseBridgeEvent({ name: 'appRemoved', packageName });
         return true;
     }
 
@@ -128,6 +125,54 @@ export class BridgeMock implements JSToBridgeAPI
         alert(`${this._prefix} Requested launch ${packageName}`);
         return true;
     }
+
+    // icon packs
+
+    // TODO: draft - uncomment after icon pack support is implemented
+    // getIconPacksURL(includeItems?: boolean): string
+    // {
+    //     return this.config.makeGetIconPacksUrl(includeItems);
+    // }
+
+    // getIconPackInfoURL(packageName: string, includeItems?: boolean): string
+    // {
+    //     return this.config.makeGetIconPackInfoUrl(packageName, includeItems);
+    // }
+
+    // getIconPackAppFilterXMLURL(packageName: string): string
+    // {
+    //     return this.config.makeGetIconPackAppFilterXMLUrl(packageName);
+    // }
+
+
+    // icons
+
+    // TODO: draft - uncomment after icon pack support is implemented
+    // getAppIconURL(appPackageName: string, iconPackPackageName?: string): string
+    // {
+    //     return this.config.makeGetAppIconUrl(appPackageName, iconPackPackageName);
+    // }
+
+    getDefaultAppIconURL(packageName: string): string 
+    {
+        return this.config.makeGetDefaultIconUrl(packageName);
+    }
+
+    // TODO: draft - uncomment after icon pack support is implemented
+    // getIconPackAppIconURL(iconPackPackageName: string, appPackageName: string): string
+    // {
+    //     return this.config.makeGetIconPackAppIconUrl(iconPackPackageName, appPackageName);
+    // }
+
+    // getIconPackItemURL(iconPackPackageName: string, componentName: string): string
+    // {
+    //     return this.config.makeGetIconPackItemUrl(iconPackPackageName, componentName);
+    // }
+
+    // getIconPackDrawableURL(iconPackPackageName: string, drawableName: string): string
+    // {
+    //     return this.config.makeGetIconPackDrawableUrl(iconPackPackageName, drawableName);
+    // }
 
 
     // wallpaper
@@ -177,7 +222,7 @@ export class BridgeMock implements JSToBridgeAPI
     requestSetBridgeButtonVisibility(state: BridgeButtonVisibility, showToastIfFailed?: boolean): boolean
     {
         this.bridgeButtonVisibility = state;
-        this.raiseBridgeEvent('bridgeButtonVisibilityChanged', { newValue: state });
+        this.raiseBridgeEvent({ name: 'bridgeButtonVisibilityChanged', newValue: state });
         return true;
     }
 
@@ -192,20 +237,22 @@ export class BridgeMock implements JSToBridgeAPI
     requestSetDrawSystemWallpaperBehindWebViewEnabled(enable: boolean, showToastIfFailed?: boolean): boolean
     {
         this.drawSystemWallpaperBehindWebViewEnabled = enable;
-        this.raiseBridgeEvent('drawSystemWallpaperBehindWebViewChanged', { newValue: enable });
+        this.raiseBridgeEvent({ name: 'drawSystemWallpaperBehindWebViewChanged', newValue: enable });
         return true;
     }
 
 
     // overscroll effects
 
-    getOverscrollEffects(): OverscrollEffects {
+    getOverscrollEffects(): OverscrollEffects
+    {
         return this.overscrollEffects;
     }
-    
-    requestSetOverscrollEffects(effects: OverscrollEffects, showToastIfFailed?: boolean | undefined): boolean {
+
+    requestSetOverscrollEffects(effects: OverscrollEffects, showToastIfFailed?: boolean | undefined): boolean
+    {
         this.overscrollEffects = effects;
-        this.raiseBridgeEvent('overscrollEffectsChanged', { newValue: effects });
+        this.raiseBridgeEvent({ name: 'overscrollEffectsChanged', newValue: effects });
         return true;
     }
 
@@ -234,7 +281,7 @@ export class BridgeMock implements JSToBridgeAPI
     requestSetSystemNightMode(mode: SystemNightMode, showToastIfFailed?: boolean): boolean
     {
         this.systemNightMode = mode;
-        this.raiseBridgeEvent('systemNightModeChanged', { newValue: mode });
+        this.raiseBridgeEvent({ name: 'systemNightModeChanged', newValue: mode });
         return true;
     }
 
@@ -249,7 +296,7 @@ export class BridgeMock implements JSToBridgeAPI
     requestSetBridgeTheme(theme: BridgeTheme, showToastIfFailed?: boolean): boolean
     {
         this.bridgeTheme = theme;
-        this.raiseBridgeEvent('bridgeThemeChanged', { newValue: theme });
+        this.raiseBridgeEvent({ name: 'bridgeThemeChanged', newValue: theme });
         return true;
     }
 
@@ -264,9 +311,9 @@ export class BridgeMock implements JSToBridgeAPI
     requestSetStatusBarAppearance(appearance: SystemBarAppearance, showToastIfFailed?: boolean): boolean
     {
         this.statusBarAppearance = appearance;
-        this.raiseBridgeEvent('statusBarAppearanceChanged', { newValue: appearance });
-        this.raiseBridgeEvent('statusBarsWindowInsetsChanged', { newValue: this._getStatusBarsWindowInsets() });
-        this.raiseBridgeEvent('systemBarsWindowInsetsChanged', { newValue: this._getSystemBarsWindowInsets() });
+        this.raiseBridgeEvent({ name: 'statusBarAppearanceChanged', newValue: appearance });
+        this.raiseBridgeEvent({ name: 'statusBarsWindowInsetsChanged', newValue: this._getStatusBarsWindowInsets() });
+        this.raiseBridgeEvent({ name: 'systemBarsWindowInsetsChanged', newValue: this._getSystemBarsWindowInsets() });
         return true;
     }
 
@@ -278,9 +325,9 @@ export class BridgeMock implements JSToBridgeAPI
     requestSetNavigationBarAppearance(appearance: SystemBarAppearance, showToastIfFailed?: boolean): boolean
     {
         this.navigationBarAppearance = appearance;
-        this.raiseBridgeEvent('navigationBarAppearanceChanged', { newValue: appearance });
-        this.raiseBridgeEvent('navigationBarsWindowInsetsChanged', { newValue: this._getNavigationBarsWindowInsets() });
-        this.raiseBridgeEvent('systemBarsWindowInsetsChanged', { newValue: this._getSystemBarsWindowInsets() });
+        this.raiseBridgeEvent({ name: 'navigationBarAppearanceChanged', newValue: appearance });
+        this.raiseBridgeEvent({ name: 'navigationBarsWindowInsetsChanged', newValue: this._getNavigationBarsWindowInsets() });
+        this.raiseBridgeEvent({ name: 'systemBarsWindowInsetsChanged', newValue: this._getSystemBarsWindowInsets() });
         return true;
     }
 
@@ -322,6 +369,12 @@ export class BridgeMock implements JSToBridgeAPI
     requestExpandNotificationShade(showToastIfFailed?: boolean): boolean
     {
         alert(`${this._prefix} requestExpandNotificationShade`);
+        return true;
+    }
+
+    requestOpenAndroidSettings(showToastIfFailed?: boolean): boolean
+    {
+        alert(`${this._prefix} requestOpenAndroidSettings`);
         return true;
     }
 
@@ -470,14 +523,14 @@ export class BridgeMock implements JSToBridgeAPI
             return JSON.stringify(<WindowInsets>{ left: leftOrInsets, top, right, bottom });
     }
 
-    public raiseBridgeEvent(...event: BridgeEventListenerArgs)
+    public raiseBridgeEvent(event: BridgeEvent)
     {
         if (this.config.logRaisedBridgeEvents)
         {
-            const [name, args] = event;
-            console.log(`[BridgeMock] raiseBridgeEvent(${name}): args:`, args);
+            console.log(`[BridgeMock] raiseBridgeEvent:`, event);
         }
 
-        onBridgeEvent?.(...event);
+        if (typeof onBridgeEvent === 'function')
+            onBridgeEvent(event);
     }
 }

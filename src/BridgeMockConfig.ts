@@ -7,14 +7,25 @@ export function createDefaultBridgeMockConfig()
     return {
         // system
         apiLevel: 34,
-        bridgeVersionCode: 2,
-        bridgeVersionName: '0.0.2alpha',
+        bridgeVersionCode: 3,
+        bridgeVersionName: '0.0.3alpha',
         logRaisedBridgeEvents: true,
 
         // fetch
         projectUrl: '/',
         appsUrl: '/mock/apps.json',
+
+        // icon packs
+        makeGetIconPacksUrl: (includeItems?: boolean) => `/mock/icons/icon-packs.json`,
+        makeGetIconPackInfoUrl: (packageName: string, includeItems?: boolean) => `/mock/icons/${packageName}/info.json`,
+        makeGetIconPackAppFilterXMLUrl: (packageName: string) => `/mock/icons/${packageName}/appfilter.xml`,
+        
+        // icons
+        makeGetAppIconUrl: (appPackageName: string, iconPackPackageName?: string) => `/mock/icons/${iconPackPackageName ?? 'default'}/${appPackageName}.png`,
         makeGetDefaultIconUrl: (packageName: string) => `/mock/icons/default/${packageName}.png`,
+        makeGetIconPackAppIconUrl: (iconPackPackageName: string, appPackageName: string) => `/mock/icons/${iconPackPackageName}/${appPackageName}.png`,
+        makeGetIconPackItemUrl: (iconPackPackageName: string, componentName: string) => `/mock/icons/${iconPackPackageName}/${componentName}.png`,
+        makeGetIconPackDrawableUrl: (iconPackPackageName: string, drawableName: string) => `/mock/icons/${iconPackPackageName}/${drawableName}.png`,
 
         // wallpaper
         logWallpaperEvents: true,
